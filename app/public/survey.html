@@ -155,11 +155,12 @@
             </div>
          </div>
       </div>
+
       <script type="text/javascript">
          $("form").on('submit',function(e) {
             console.log('submit form');
             e.preventDefault();
-         var newFormEntry = {
+         var scores = {
                name: $("#name").val().trim(),
                url: $("#url").val().trim(),
                q1: $("#questionOne").val().trim(),
@@ -173,10 +174,14 @@
                q9: $("#questionNine").val().trim(),
                q10: $("#questionTen").val().trim()
             };
-            console.log(newFormEntry);
+            console.log(scores);
 
-         });
-         
+            $.POST("/api/:new", scores)
+            .done(function(data){
+               console.log(data);
+               alert("Form Submitted");
+            });
+         });         
       </script>
    </body>
 </html>
