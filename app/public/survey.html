@@ -149,34 +149,49 @@
                      </select>
                      <br>
                   </div>
-                  <button type="submit" class="btn btn-primary btn-lrg" id="submit-btn">Submit</button>
+                  <a class="btn btn-success btn-lg" id="submit" href="#" role="button"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Submit</a>
                   </form>
                </div>
             </div>
          </div>
       </div>
-
       <script type="text/javascript">
-         $("form").on('submit',function(e) {
-            console.log('submit form');
-            e.preventDefault();
-         var friend = {
-               name: $("#name").val().trim(),
-               url: $("#url").val().trim(),
-               scores:[ $("#questionOne").val(), $("#questionTwo").val(),$("#questionThree").val(),$("#questionFour").val(),
-                        $("#questionFive").val(), $("#questionSix").val(), $("#questionSeven").val(),
-                        $("#questionEight").val(),$("#questionNine").val(),$("#questionTen").val()]
-                     };
+             $('#submit-btn').on('click', function() {
 
+        // store name and photo link as variables
+        var name = $('#name').val().trim();
+        var url = $('#url').val().trim();
+        var ansLength = $('#questionOne').val().length + $('#questionTwo').val().length + $('#questionThree').val().length + $('#questionFour').val().length + $('#questionFive').val().length + $('#questionSix').val().length + $('#questionSeven').val().length + $('#QuestionEight').val().length + $('#questionNine').val().length + $('#questionTen').val().length;
 
-            console.log(freind);
+        // if name and photo link aren't blank:
+        if (name.length > 0 && url.length > 0 && ansLength === 10) {
 
-            $.POST("/api/friends", friend)
-            .done(function(data){
-               console.log(data);
-               alert("Form Submitted");
+            // create new friend object
+            var friend = {
+                name: name,
+                photo: photoLink,
+                scores: [ $("#questionOne").val(), $("#questionTwo").val(),$("#questionThree").val(),
+                           $("#questionFour").val(),$("#questionFive").val(), $("#questionSix").val(),
+                            $("#questionSeven").val(),$("#questionEight").val(),$("#questionNine").val(),
+                            $("#questionTen").val()]
+                        };
+
+            // post data to friends API
+            $.post('/api/friends', friend, function(data) {
+                $('.modal-title').html('Your Match ');
+                $('.modal-body').html('<h4>' + data.name + '</h4><img src="' + data.url + '" alt="photo" height=300><p>');
+                $('.modal').modal('show');
             });
-         });         
+            // don't refresh
+            return false;
+
+            // if name and photo link are blank:
+        } else {
+            $('.modal-title').html('Alert');
+            $('.modal-body').html('Please complete form');
+            $('.modal').modal('show');
+        }
+    });
       </script>
    </body>
 </html>
