@@ -149,27 +149,45 @@
                      </select>
                      <br>
                   </div>
+                  <p>
                   <a class="btn btn-success btn-lg" id="submit" href="#" role="button"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Submit</a>
+                  </p>
+                  <hr>
                   </form>
+                  <div class="modal fade" id="modal">
+                     <div class="modal-dialog" role="document">
+                        <div class="modal-header">
+                           <h2 class="modal-title"></h2>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                           </button>
+                           <div class="modal-body"></div>
+                           <div class="modal-footer">
+                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+
                </div>
             </div>
          </div>
       </div>
       <script type="text/javascript">
-             $('#submit-btn').on('click', function() {
-
+             $('#submit').on('click', function() {
+                  console.log("entered submit");
         // store name and photo link as variables
         var name = $('#name').val().trim();
         var url = $('#url').val().trim();
-        var ansLength = $('#questionOne').val().length + $('#questionTwo').val().length + $('#questionThree').val().length + $('#questionFour').val().length + $('#questionFive').val().length + $('#questionSix').val().length + $('#questionSeven').val().length + $('#QuestionEight').val().length + $('#questionNine').val().length + $('#questionTen').val().length;
 
         // if name and photo link aren't blank:
-        if (name.length > 0 && url.length > 0 && ansLength === 10) {
+        if (name.length > 0 && url.length > 0 ) {
 
             // create new friend object
             var friend = {
                 name: name,
-                photo: photoLink,
+                photo: url,
                 scores: [ $("#questionOne").val(), $("#questionTwo").val(),$("#questionThree").val(),
                            $("#questionFour").val(),$("#questionFive").val(), $("#questionSix").val(),
                             $("#questionSeven").val(),$("#questionEight").val(),$("#questionNine").val(),

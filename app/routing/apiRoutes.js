@@ -16,18 +16,18 @@ module.exports = function(app) {
 	});
 
 	app.post("/api/friends", function(req,res){
-		var newFriend = req.body;
-        var totalScore;
-        var compDiff = 40;
-        var compFriend;
-        var compFriendPhoto;
+                var newFriend = req.body;
+                var totalScore;
+                var compDiff = 40;
+                var compFriend;
+                var compFriendPhoto;
 
         for(var i = 0; i < peopleObject.length; i++){
         	totalScore = 0;
 
-        	for(var c = 0; j < 10; j++){
-        		var score1 = friend.score[c];
-        		var score2 = peopleObject[i].scores[c];
+        	for(var q = 0; q < 10; q++){
+        		var score1 = newFriend.scores[q];
+        		var score2 = peopleObject[i].scores[q];
         		parseInt(score1);
         		parseInt(score2);
 
@@ -43,7 +43,6 @@ module.exports = function(app) {
         		compDiff = newTotalScore;
         		compFriend = peopleObject[i].name;
         		compFriendPhoto = peopleObject[i].url;
-
         	}
         }
 
@@ -53,7 +52,7 @@ module.exports = function(app) {
         };
 
         people.people.push(matchingFriend);
-
+                res.json(matchingFriend);
 	});
 
 
