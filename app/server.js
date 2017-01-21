@@ -1,25 +1,16 @@
 //DEPENDENCIES
 var express = require("express");
-var bodyParser = require("body-parser");
 var path = require("path");
 
 // SETS UP EXPRESS APP - PT
 var app = express();
-var PORT = 4000;
+var PORT = process.env.PORT || 4000;
 
+//ROUTING
+var apiRoutes = require('./app/routing/apiRoutes')(app);
+var htmlRoutes = require('./app/routing/htmlRoutes')(app);
 
-//SETS UP THE EXPRESS APP TO HANDLE DATA PARSING
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({}));
-app.use(bodyParser.text());
-app.use(bodyParser.json({ type: "application/vnd.api+json" }));
-
-
-app.get("/routing", function(req,res){
-	res.sendFile(path.join(__dirname, "survey.html"));
-});
 
 app.listen(PORT, function () {
-	console.log("App listening on PORT" + PORT );
+	console.log("App listening on PORT: " + PORT );
 });

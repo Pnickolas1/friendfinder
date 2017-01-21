@@ -160,23 +160,18 @@
          $("form").on('submit',function(e) {
             console.log('submit form');
             e.preventDefault();
-         var scores = {
+         var friend = {
                name: $("#name").val().trim(),
                url: $("#url").val().trim(),
-               q1: $("#questionOne").val().trim(),
-               q2: $("#questionTwo").val().trim(),
-               q3: $("#questionThree").val().trim(),
-               q4: $("#questionFour").val().trim(),
-               q5: $("#questionFive").val().trim(),
-               q6: $("#questionSix").val().trim(),
-               q7: $("#questionSeven").val().trim(),
-               q8: $("#questionEight").val().trim(),
-               q9: $("#questionNine").val().trim(),
-               q10: $("#questionTen").val().trim()
-            };
-            console.log(scores);
+               scores:[ $("#questionOne").val(), $("#questionTwo").val(),$("#questionThree").val(),$("#questionFour").val(),
+                        $("#questionFive").val(), $("#questionSix").val(), $("#questionSeven").val(),
+                        $("#questionEight").val(),$("#questionNine").val(),$("#questionTen").val()]
+                     };
 
-            $.POST("/api/:new", scores)
+
+            console.log(freind);
+
+            $.POST("/api/friends", friend)
             .done(function(data){
                console.log(data);
                alert("Form Submitted");
